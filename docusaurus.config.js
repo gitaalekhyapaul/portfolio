@@ -74,15 +74,15 @@ const config = {
             items: [
               {
                 label: "About Me",
-                to: "/docs/about-me",
+                to: "/",
               },
               {
                 label: "Lab Work",
-                to: "/docs/lab-work",
+                to: "/lab",
               },
               {
                 label: "Projects",
-                to: "/docs/projects",
+                to: "/projects",
               },
             ],
           },

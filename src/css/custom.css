@@ -19,3 +19,33 @@
 html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+/* Custom CSS */
+#my-image {
+  width: 50vw;
+  max-width: 200px;
+  border: 5px solid var(--ifm-color-primary);
+}
+
+.admonition.admonition-info {
+  --ifm-color-primary: #c86fff1f;
+  background-color: var(--ifm-color-primary);
+  border-left-color: var(--ifm-color-primary-darkest);
+}
+
+#resume-cta > h3 {
+  margin: 0;
+}
+#resume-cta {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #c86fff1f;
+  border: none;
+  transition-duration: 0.5s;
+}
+
+#resume-cta:hover {
+  background-color: var(--ifm-color-primary-dark);
+  color: rgba(0, 0, 0);
+  cursor: pointer;
+}
