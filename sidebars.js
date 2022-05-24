@@ -8,16 +8,16 @@ const sidebars = {
       id: "about-me",
       label: "About Me",
     },
-    {
-      type: "doc",
-      id: "lab-work",
-      label: "Lab Work",
-    },
-    {
-      type: "doc",
-      id: "projects",
-      label: "Projects",
-    },
+    // {
+    //   type: "doc",
+    //   id: "lab-work",
+    //   label: "Lab Work",
+    // },
+    // {
+    //   type: "doc",
+    //   id: "projects",
+    //   label: "Projects",
+    // },
   ],
 };
 

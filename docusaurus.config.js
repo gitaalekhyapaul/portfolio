@@ -5,9 +5,9 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "CN Portfolio | Gita Alekhya Paul",
-  tagline: "A portfolio website of Gita Alekkhya Paul.",
-  url: "https://cn-portfolio.gitaalekhyapaul.com",
+  title: "Portfolio | Gita Alekhya Paul",
+  tagline: "A portfolio website of Gita Alekhya Paul.",
+  url: "https://gitaalekhyapaul.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -40,30 +40,30 @@ const config = {
         disableSwitch: true,
       },
       navbar: {
-        title: "CN Portfolio | Gita Alekhya Paul",
+        title: "Portfolio | Gita Alekhya Paul",
         logo: {
-          alt: "CN Portfolio Logo",
+          alt: "Portfolio Logo",
           src: "img/logo.jpeg",
         },
         items: [
-          {
-            type: "doc",
-            docId: "about-me",
-            position: "left",
-            label: "About Me",
-          },
-          {
-            type: "doc",
-            docId: "lab-work",
-            position: "left",
-            label: "Lab Work",
-          },
-          {
-            type: "doc",
-            docId: "projects",
-            position: "left",
-            label: "Projects",
-          },
+          // {
+          //   type: "doc",
+          //   docId: "about-me",
+          //   position: "left",
+          //   label: "About Me",
+          // },
+          // {
+          //   type: "doc",
+          //   docId: "lab-work",
+          //   position: "left",
+          //   label: "Lab Work",
+          // },
+          // {
+          //   type: "doc",
+          //   docId: "projects",
+          //   position: "left",
+          //   label: "Projects",
+          // },
         ],
       },
       footer: {
@@ -76,14 +76,14 @@ const config = {
                 label: "About Me",
                 to: "/",
               },
-              {
-                label: "Lab Work",
-                to: "/lab",
-              },
-              {
-                label: "Projects",
-                to: "/projects",
-              },
+              // {
+              //   label: "Lab Work",
+              //   to: "/lab",
+              // },
+              // {
+              //   label: "Projects",
+              //   to: "/projects",
+              // },
             ],
           },
           {
@@ -108,7 +108,7 @@ const config = {
             items: [
               {
                 label: "E-mail",
-                href: "mailto:gp9979@srmist.edu.in",
+                href: "mailto:contact@gitaalekhyapaul.com",
               },
             ],
           },
