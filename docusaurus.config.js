@@ -13,7 +13,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "gitaalekhyapaul",
-  projectName: "cn-portfolio",
+  projectName: "portfolio",
 
   presets: [
     [
@@ -100,6 +100,14 @@ const config = {
               {
                 label: "Twitter",
                 href: "https://twitter.com/gitaalekhyapaul",
+              },
+              {
+                label: "Google Scholar",
+                href: "https://scholar.google.com/citations?user=6DUa_JwAAAAJ",
+              },
+              {
+                label: "ORCID ID",
+                href: "https://orcid.org/0000-0002-9440-3403",
               },
             ],
           },

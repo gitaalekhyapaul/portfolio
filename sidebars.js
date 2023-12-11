@@ -8,16 +8,31 @@ const sidebars = {
       id: "about-me",
       label: "About Me",
     },
-    // {
-    //   type: "doc",
-    //   id: "lab-work",
-    //   label: "Lab Work",
-    // },
-    // {
-    //   type: "doc",
-    //   id: "projects",
-    //   label: "Projects",
-    // },
+    {
+      type: "link",
+      label: "GitHub",
+      href: "https://github.com/gitaalekhyapaul",
+    },
+    {
+      type: "link",
+      label: "Twitter",
+      href: "https://twitter.com/gitaalekhyapaul",
+    },
+    {
+      type: "link",
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/gitaalekhyapaul",
+    },
+    {
+      type: "link",
+      label: "Google Scholar",
+      href: "https://scholar.google.com/citations?user=6DUa_JwAAAAJ",
+    },
+    {
+      type: "link",
+      label: "ORCID ID",
+      href: "https://orcid.org/0000-0002-9440-3403",
+    },
   ],
 };
 
