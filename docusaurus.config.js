@@ -1,7 +1,6 @@
 // @ts-check
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const { themes } = require("prism-react-renderer");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -26,6 +25,10 @@ const config = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        gtag: {
+          trackingID: "G-4ELR9HWEKY",
+          anonymizeIP: false,
         },
       }),
     ],
@@ -124,8 +127,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Gita Alekhya Paul`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.vsDark,
+        darkTheme: themes.vsDark,
       },
     }),
 };
