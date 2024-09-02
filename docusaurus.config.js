@@ -37,6 +37,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: "og:type",
+          content: "website",
+        },
+      ],
       colorMode: {
         defaultMode: "dark",
         respectPrefersColorScheme: false,
