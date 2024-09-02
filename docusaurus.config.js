@@ -4,7 +4,7 @@ const { themes } = require("prism-react-renderer");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Portfolio | Gita Alekhya Paul",
+  title: "Gita Alekhya Paul",
   tagline: "A portfolio website of Gita Alekhya Paul.",
   url: "https://gitaalekhyapaul.com",
   baseUrl: "/",
