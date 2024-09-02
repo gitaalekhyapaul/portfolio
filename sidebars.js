@@ -30,6 +30,11 @@ const sidebars = {
     },
     {
       type: "link",
+      label: "Scopus",
+      href: "https://www.scopus.com/authid/detail.uri?authorId=58106560000",
+    },
+    {
+      type: "link",
       label: "ORCID ID",
       href: "https://orcid.org/0000-0002-9440-3403",
     },

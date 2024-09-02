@@ -1,3 +1,3 @@
-# CN Portfolio
+# My Portfolio
 
-A portfolio website assignment for 18CSC302J - COMPUTER NETWORKS
+Portfolio Website for Gita Alekhya Paul

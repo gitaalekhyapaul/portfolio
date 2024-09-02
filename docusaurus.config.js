@@ -109,6 +109,10 @@ const config = {
                 href: "https://scholar.google.com/citations?user=6DUa_JwAAAAJ",
               },
               {
+                label: "Scopus",
+                href: "https://www.scopus.com/authid/detail.uri?authorId=58106560000",
+              },
+              {
                 label: "ORCID ID",
                 href: "https://orcid.org/0000-0002-9440-3403",
               },
