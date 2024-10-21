@@ -46,17 +46,51 @@ Over the past few years, in my time as a full-time engineer, I have explored dee
 Actively looking for Masters/PhD supervisors in the field of blockchain and security.
 :::
 
-### Resume
+### Curriculum Vitae
 
-**In case you want to skip reading below, and download it for future reference...**
+**In case you want to skip reading below, my CV encapsulates my academic and professional journey into 2 pages.**
 
+import {useEffect} from 'react'
+export const ResumeButton = () => {
+  useEffect(() => {
+    const button = document.getElementById('resume-cta');
+    
+    if (button) {
+      button.addEventListener('click', function() {
+        if(gtag) {
+          gtag('event', 'resume_view', {
+          'event_category': 'Button',
+          'event_label': 'Resume CTA',
+          'value': 1
+        });
+        }
+      });
+    }
+
+    return () => {
+      if (button) {
+        button.removeEventListener('click', () => {}); // Clean up event listener
+      }
+    };
+
+}, []);
+
+return (
+
+<>
 <div align="center">
+
   <a href="https://resume.gitaalekhyapaul.com" target="_blank">
     <button id="resume-cta">
-      <h3>Download My Resume</h3>
+      <h3>Download My CV</h3>
     </button>
   </a>
 </div>
+</>
+  );
+};
+
+<ResumeButton />
 
 ### Details
 
