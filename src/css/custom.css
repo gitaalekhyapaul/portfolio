@@ -49,3 +49,27 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
   color: rgba(0, 0, 0);
   cursor: pointer;
 }
+
+#cv-cta > h3 {
+  margin: 0;
+}
+#cv-cta {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #c86fff1f;
+  border: none;
+  transition-duration: 0.5s;
+}
+
+#cv-cta:hover {
+  background-color: var(--ifm-color-primary-dark);
+  color: rgba(0, 0, 0);
+  cursor: pointer;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #cv-cta {
+    margin-top: 10px;
+  }
+}

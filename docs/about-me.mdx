@@ -3,11 +3,7 @@ id: about-me
 title: "About Me"
 hide_title: true
 image: "https://gitaalekhyapaul.com/img/header.png"
-description: "Gita Alekhya Paul is a Computer Science graduate from SRMIST Kattankulathur with a specialization in Cyber Security. A security enthusiast with a passion for Web3, Gita focuses on enhancing user experiences and ensuring security in decentralized systems. Starting with electronics and robotics, Gita's journey has evolved to encompass information security, backend development, cloud infrastructure, and blockchain technology.
-
-Gita has secured prestigious internships and fellowships, including the GitHub Externship, MLH Fellowship, and MITACS Globalink Internship. As a 4x published author, Gita’s research primarily explores scaling distributed systems with blockchain, with a particular interest in wireless mesh networks.
-
-Currently, Gita is diving deep into Web3 usability, on-chain data analytics, and AI-driven agentic transactions. Actively seeking Masters/PhD opportunities, Gita aims to continue pushing the boundaries in blockchain and security."
+description: "Gita Alekhya Paul is a blockchain security researcher and Web3 engineer specializing in agent orchestration and on-chain cryptoeconomic systems. With experience at Collab.Land and MotherDAO, his work spans LLM agents, smart accounts, and decentralized AI infrastructure."
 keywords:
   - developer
   - web3 developer
@@ -19,7 +15,23 @@ keywords:
   - ethical hacker
   - gita alekhya paul
   - web3
-tags: [developer, web3 developer, blockchain developer, cybersecurity, security research, ethereum, zilliqa, ethical hacker, gita alekhya paul, web3]
+  - ai researcher
+  - ai agents
+tags:
+  [
+    developer,
+    web3 developer,
+    blockchain developer,
+    cybersecurity,
+    security research,
+    ethereum,
+    zilliqa,
+    ethical hacker,
+    gita alekhya paul,
+    web3,
+    ai researcher,
+    ai agents,
+  ]
 slug: /
 ---
 
@@ -33,30 +45,31 @@ slug: /
 <br />
 
 :::info Hello There!  
-Hi 👋, my name is **Gita Alekhya Paul**, a graduate student from SRMIST Kattankulathur. I have majored in Computer Science and Engineering with specialization in Cyber Security. I am a security nerd at heart, and believe in the potential for seamless UX in Web3 systems, enabling self-sovereignty of funds and intents back to the general public.
+Hi 👋 I’m Gita Alekhya Paul, a Computer Science graduate from SRMIST Kattankulathur, specialized in Cyber Security. I’m a security nerd at heart and a firm believer in the promise of seamless Web3 UX—enabling self-sovereignty over funds and intents for everyday users.
 
-I've started my journey as an electronics enthusiast, building robots and gizmos, going to science exhibitions from an early age. From there on, during my tenure in SRMIST, I have worked with information security, server management, wireless mesh networks, IoT networks, cloud infrastructure, backend web development, and eventually moving to Web3 technologies. I had started my journey on the Zilliqa ecosystem, now gradually moving into the Ethereum ecosystem.
+My journey began with building robots and electronics for science exhibitions. That early curiosity evolved at SRMIST into hands-on experience with information security, wireless mesh and IoT networks, server management, cloud infrastructure, backend systems, and eventually, Web3. I started in the Zilliqa ecosystem and now actively work in the Ethereum space.
 
-I am a core believer in innovating for the future, **one commit at a time**, which has led me to acquire prestigious internships, externships and fellowships like the GitHub Externship, MLH Fellowship and the MITACS Globalink Internship, just to name a few. Currently, I am focusing on improving the Web3 usability for non-native users and improving the security for them.
+I believe in building the future one commit at a time, which has led me to internships and fellowships like the GitHub Externship, MLH Fellowship, and MITACS Globalink Internship. My current focus lies in improving Web3 usability and security for non-native users.
 
-I am a 4x published author, and most of my research has been revolving around how we can scale distributed computing systems using blockchain technology. I am a big fan of wireless mesh technology, and have spent a considerable time in my undergraduate researching them, and developing systems to scale them efficiently over large distances.
+As a 4x published author, my research centers on scaling distributed systems with blockchain—especially using wireless mesh networks. I’ve spent years developing scalable, decentralized infrastructure across hardware and software.
 
-Over the past few years, in my time as a full-time engineer, I have explored deep into enabling seamless UX for non-native users using key abstraction, chain abstraction and account abstraction. Additional to that, I am exploring on-chain data analytics, and using user interactions to train and facilitate agentic transactions using AI agents created by fine-tuning LLMs.
+In my time as a full-time engineer, I’ve worked on smart accounts, key and chain abstraction, and real-time analytics to support user-centric UX. Lately, I’m specializing in agent orchestration and on-chain cryptoeconomic systems for AI agent collaboration—training LLM-powered agents that interact securely and autonomously on-chain.
 
-Actively looking for Masters/PhD supervisors in the field of blockchain and security.
+I’m actively looking for Masters/PhD supervisors in blockchain and security. If you’re working in this space, let’s connect.
 :::
 
-### Curriculum Vitae
+### Resume and Curriculum Vitae
 
-**In case you want to skip reading below, my CV encapsulates my academic and professional journey into 2 pages.**
+**In case you want to skip reading below, my Resume and CV encapsulate my academic and professional journey into an impactful 1-pager or a comprehensive 2 pages.**
 
 import {useEffect} from 'react'
-export const ResumeButton = () => {
+export const ResumeCVButton = () => {
   useEffect(() => {
-    const button = document.getElementById('resume-cta');
+    const resumeButton = document.getElementById('resume-cta');
+    const cvButton = document.getElementById('cv-cta');
     
-    if (button) {
-      button.addEventListener('click', function() {
+    if (resumeButton) {
+      resumeButton.addEventListener('click', function() {
         if(gtag) {
           gtag('event', 'resume_view', {
           'event_category': 'Button',
@@ -67,9 +80,24 @@ export const ResumeButton = () => {
       });
     }
 
+    if (cvButton) {
+      cvButton.addEventListener('click', function() {
+        if(gtag) {
+          gtag('event', 'cv_view', {
+          'event_category': 'Button',
+          'event_label': 'CV CTA',
+          'value': 1
+        });
+        }
+      });
+    }
+
     return () => {
-      if (button) {
-        button.removeEventListener('click', () => {}); // Clean up event listener
+      if (resumeButton) {
+        resumeButton.removeEventListener('click', () => {}); // Clean up event listener
+      }
+      if (cvButton) {
+        cvButton.removeEventListener('click', () => {}); // Clean up event listener
       }
     };
 
@@ -78,19 +106,26 @@ export const ResumeButton = () => {
 return (
 
 <>
-<div align="center">
-
-  <a href="https://resume.gitaalekhyapaul.com" target="_blank">
-    <button id="resume-cta">
-      <h3>Download My CV</h3>
-    </button>
-  </a>
-</div>
+  <div align="center">
+    <a
+      href="https://pow.gitaalekhyapaul.com/resume"
+      target="_blank"
+      style={{ marginRight: "10px" }}
+    >
+      <button id="resume-cta">
+        <h3>Download My Resume</h3>
+      </button>
+    </a>
+    <a href="https://pow.gitaalekhyapaul.com/cv" target="_blank">
+      <button id="cv-cta">
+        <h3>Download My CV</h3>
+      </button>
+    </a>
+  </div>
 </>
-  );
-};
+)};
 
-<ResumeButton />
+<ResumeCVButton />
 
 ### Details
 
@@ -149,11 +184,14 @@ return (
   - Key abstraction and chain abstraction
   - Account abstraction
   - Zero-knowledge Proofs
-- #### Data Analytics and ML
+  - On-chain cryptoeconomic systems for AI Agents
+- #### Data Analytics and AI/ML
   - BigQuery
   - Dune Analytics
   - LLM Fine-tuning
   - Custom AI Agents
+  - LangChain, LangGraph and ElizaOS
+  - MCP and custom agent orchestration systems
 - #### Cyber Security
   - Linux
   - Network Security
@@ -198,7 +236,7 @@ return (
   - **Position:** _Lead Software Engineer, Research and Development_
   - **Location:** _Remote_
   - **Tenure:** October, 2022 - Present
-  - Maintained and developed software with over 4.5 Million active users, and spanning over 59,000 Discord and Telegram communities. Launched an on-chain SocialFi product with over 10,000+ users, seamlessly claiming their smart account wallets using account abstraction and key abstraction using MPC networks. Researched and developed proof-of-concept solutions integrating LLM agents to do on-chain actions, and built data pipelines in BigQuery, Mixpanel and on-chain dashboards and analytics in Dune analytics to track all the above initiatives. Worked closely on novel identity verification solutions using image steganography and machine learning algorithms.
+  - Gita maintained and developed software used by over 4.5 million active users across 59,000+ Discord and Telegram communities. He launched an on-chain SocialFi product with over 10,000 users, enabling seamless smart account wallet claims through account abstraction and key abstraction using MPC networks. He also researched and developed proof-of-concept solutions for integrating LLM agents to perform on-chain actions, while building data pipelines in BigQuery and Mixpanel, as well as creating dashboards and analytics using Dune to track user interactions and platform performance. Beyond blockchain infrastructure, Gita contributed to novel identity verification systems using image steganography and machine learning. Through his role at Collab.Land, he also serves as a technical steward for [MotherDAO](https://www.hellomother.ai/about#stewards), where he helped design and implement the core middleware enabling AI agents to autonomously interact on-chain. His work leverages emerging technologies like 0xIntuition, Nevermined, and Recall (formerly OrbisDB) to facilitate agentic value exchange and intent resolution.
 
 - #### MITACS Globalink Research Internship
 
@@ -245,6 +283,18 @@ return (
   - Created Zapier Integrations for the company to integrate into the company APIs, facilitate the real-time data storage and notifying users and admins of events. Worked on webRTC integrations to facilitate the conduction of online webinars.
 
 ### Accomplishments and Awards
+
+- #### 1st Prize- Lit Protocol Track & Supra Standout Projects - ETHIndia 2024
+
+  - **Date:** December, 2024
+  - **Location:** _Bangalore, India_
+  - **Project Link:** _[https://github.com/gitaalekhyapaul/supranova](https://github.com/gitaalekhyapaul/supranova)_
+
+- #### 1st Prize- Nethermind: Best Agentic Project - Unfold 2024
+
+  - **Date:** December, 2024
+  - **Location:** _Bangalore, India_
+  - **Project Link:** _[https://github.com/gitaalekhyapaul/skynet-monorepo](https://github.com/gitaalekhyapaul/skynet-monorepo)_
 
 - #### 2nd Prize - Okto Wallet Red Envelope Smart Contract Track - Unfold 2023
 
