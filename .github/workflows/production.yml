@@ -183,9 +183,6 @@ jobs:
                   username: ${{ secrets.AWS_USERNAME }}
                   key: ${{ secrets.AWS_PRIVATE_KEY }}
                   script: |
-                      echo $SHELL
-                      node -v
-                      which node
                       echo "Changing directory to /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }}"
                       cd /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }} || exit 1
                       echo "Pulling latest changes..."
