@@ -1,0 +1,197 @@
+# Summary:
+# This GitHub Actions workflow automates the CI/CD process for a Node.js application to an AWS Lightsail instance.
+#
+# Workflow Structure:
+# - Two separate jobs: "Test Code" and "Deploy to AWS Lightsail"
+# - Test job runs on all triggers (PR, push, workflow_dispatch)
+# - Deploy job ONLY runs on workflow_dispatch and only if tests pass
+#
+# Triggers:
+# - CI runs automatically on push to the 'main' branch and pull requests to 'main'.
+# - Deployment (CD) ONLY runs when manually triggered via 'workflow_dispatch'.
+# - IMPORTANT: Pushes to main will NOT automatically deploy. You MUST trigger the workflow manually to deploy.
+#
+# Concurrency:
+# - The workflow uses global concurrency to ensure only one workflow runs at a time within this repo
+# - The deploy job uses a cross-repository concurrency group to ensure only one deployment runs at a time across all repos
+# - If multiple deployments are triggered, they will be queued rather than running in parallel
+#
+# Actions:
+# Test Job:
+# 1. Checks out the source code
+# 2. Sets up Node.js v18
+# 3. Installs dependencies using Yarn
+# 4. Runs formatting and linting checks
+# 5. Builds the project
+#
+# Deploy Job (only runs on manual workflow_dispatch):
+# 1. Connects to the target server via SSH
+# 2. Navigates to the project directory on the server
+# 3. Pulls the latest changes from the repository
+# 4. Installs dependencies on the server
+# 5. Builds the project on the server
+# 6. Restarts the application using PM2
+#
+# Required GitHub Secrets:
+# - AWS_HOST:         Hostname or IP address of the target AWS Lightsail server.
+# - AWS_USERNAME:     SSH username for the server (e.g., 'ubuntu', 'bitnami').
+# - AWS_PRIVATE_KEY:  The full content of the private SSH key (.pem file) for authentication.
+# - AWS_PORT:         (Optional) The SSH port if different from the default (22).
+#
+# Required package.json Scripts:
+# - "check": Should execute code formatting and linting checks (e.g., "prettier --check . && eslint .").
+# - "build": Should compile/build the project (e.g., "tsc").
+#
+# Workflow Inputs (for manual trigger):
+# - project_name:     Name of the project directory on the server (default: "portfolio").
+# - pm2_app_name:     Name of the PM2 process managing the application (default: "Portfolio").
+# - skip_ci:          Checkbox to skip pre-deployment CI checks (format, lint, build) (default: false).
+# - skip_cd:          Checkbox to skip the entire deployment (CD) step (default: false).
+#
+# How to Deploy:
+# 1. Go to the "Actions" tab in the GitHub repository
+# 2. Select "Test AND/OR Deploy Code on AWS Lightsail" workflow
+# 3. Click "Run workflow"
+# 4. Select the branch to deploy (usually 'main')
+# 5. Configure any inputs if needed
+# 6. Click "Run workflow" to start the deployment
+
+name: Test AND/OR Deploy Code on AWS Lightsail
+
+# Add permissions for the entire workflow
+permissions:
+    actions: read
+    contents: read
+
+on:
+    pull_request:
+        branches:
+            - main
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+        inputs:
+            project_name:
+                description: "Name of the project directory on the server"
+                required: true
+                default: "portfolio"
+            pm2_app_name:
+                description: "Name of the PM2 application"
+                required: true
+                default: "Portfolio"
+            skip_ci:
+                description: "Skip CI checks (format, lint, build before deploy)?"
+                required: false
+                type: boolean
+                default: false
+            skip_cd:
+                description: "Skip CD (deployment)?"
+                required: false
+                type: boolean
+                default: false
+
+# Global concurrency for the entire workflow
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    test:
+        name: Test Code
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip_cd: ${{ steps.skip_conditions.outputs.should_skip_cd }}
+            should_skip_ci: ${{ steps.skip_conditions.outputs.should_skip_ci }}
+        env:
+            PROJECT_NAME: ${{ github.event.inputs.project_name || 'portfolio' }}
+            PM2_APP_NAME: ${{ github.event.inputs.pm2_app_name || 'Portfolio' }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1 # Only need the latest commit for message check
+
+            - name: Determine Skip Conditions
+              id: skip_conditions
+              run: |
+                  SKIP_CI=false
+                  SKIP_CD=false
+
+                  if [[ "${{ github.event_name }}" == "push" ]]; then
+                    COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | tr '[:upper:]' '[:lower:]')
+                    echo "Commit message (lowercase): $COMMIT_MSG"
+                    if [[ "$COMMIT_MSG" == *"skip_ci"* ]]; then
+                      echo "SKIP_CI detected in commit message."
+                      SKIP_CI=true
+                    fi
+                    if [[ "$COMMIT_MSG" == *"skip_cd"* ]]; then
+                      echo "SKIP_CD detected in commit message."
+                      SKIP_CD=true
+                    fi
+                  elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+                    if [[ "${{ github.event.inputs.skip_ci }}" == "true" ]]; then
+                      echo "Skip CI input is true."
+                      SKIP_CI=true
+                    fi
+                    if [[ "${{ github.event.inputs.skip_cd }}" == "true" ]]; then
+                      echo "Skip CD input is true."
+                      SKIP_CD=true
+                    fi
+                  fi
+
+                  echo "should_skip_ci=$SKIP_CI" >> $GITHUB_OUTPUT
+                  echo "should_skip_cd=$SKIP_CD" >> $GITHUB_OUTPUT
+
+            - name: Set up Node.js
+              if: steps.skip_conditions.outputs.should_skip_ci == 'false'
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+                  cache: "yarn"
+
+            - name: Install dependencies
+              if: steps.skip_conditions.outputs.should_skip_ci == 'false'
+              run: yarn install --frozen-lockfile
+
+            - name: Run checks (format & lint)
+              if: steps.skip_conditions.outputs.should_skip_ci == 'false'
+              run: yarn run check
+
+            - name: Build project (pre-deploy check)
+              if: steps.skip_conditions.outputs.should_skip_ci == 'false'
+              run: yarn build
+
+    deploy-ssh:
+        name: Deploy to AWS Lightsail
+        needs: test
+        if: needs.test.outputs.should_skip_cd == 'false'
+        runs-on: ubuntu-latest
+        # Cross-repository concurrency group to prevent multiple deployments to the same server
+        concurrency:
+            group: "deploy-to-aws-lightsail-server"
+            cancel-in-progress: false
+        env:
+            PROJECT_NAME: ${{ github.event.inputs.project_name || 'portfolio' }}
+            PM2_APP_NAME: ${{ github.event.inputs.pm2_app_name || 'Portfolio' }}
+        steps:
+            - name: Deploy via SSH
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                  host: ${{ secrets.AWS_HOST }}
+                  port: ${{ secrets.AWS_PORT || 22 }}
+                  username: ${{ secrets.AWS_USERNAME }}
+                  key: ${{ secrets.AWS_PRIVATE_KEY }}
+                  script: |
+                      echo "Changing directory to /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }}"
+                      cd /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }} || exit 1
+                      echo "Pulling latest changes..."
+                      git pull
+                      echo "Installing dependencies..."
+                      yarn install --frozen-lockfile
+                      echo "Building project..."
+                      yarn build
+                      echo "Restarting PM2 application: ${{ env.PM2_APP_NAME }}..."
+                      pm2 restart ${{ env.PM2_APP_NAME }} || pm2 start dist/server.js --name ${{ env.PM2_APP_NAME }}
+                      echo "Deployment complete!"
