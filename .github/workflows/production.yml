@@ -64,9 +64,6 @@ permissions:
     contents: read
 
 on:
-    pull_request:
-        branches:
-            - main
     push:
         branches:
             - main
@@ -99,6 +96,7 @@ concurrency:
 jobs:
     test:
         name: Test Code
+        environment: Production
         runs-on: ubuntu-latest
         outputs:
             should_skip_cd: ${{ steps.skip_conditions.outputs.should_skip_cd }}
@@ -166,7 +164,8 @@ jobs:
     deploy-ssh:
         name: Deploy to AWS Lightsail
         needs: test
-        if: needs.test.outputs.should_skip_cd == 'false'
+        if: needs.test.outputs.should_skip_cd == 'false' && github.event_name != 'pull_request'
+        environment: Production
         runs-on: ubuntu-latest
         # Cross-repository concurrency group to prevent multiple deployments to the same server
         concurrency:
