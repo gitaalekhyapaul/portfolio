@@ -15,8 +15,8 @@ const sidebars = {
         },
         {
             type: "link",
-            label: "Twitter",
-            href: "https://twitter.com/gitaalekhyapaul",
+            label: "X (Formerly Twitter)",
+            href: "https://x.com/gitaalekhyapaul",
         },
         {
             type: "link",
