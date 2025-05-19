@@ -1,75 +1,75 @@
 :root {
-  --ifm-color-primary: #e0b0ff;
-  --ifm-color-primary-dark: #cf85ff;
-  --ifm-color-primary-darker: #c76fff;
-  --ifm-color-primary-darkest: #ad2fff;
-  --ifm-color-primary-light: #f1dbff;
-  --ifm-color-primary-lighter: #f9f1ff;
-  --ifm-color-primary-lightest: #ffffff;
-  --ifm-code-font-size: 95%;
+    --ifm-color-primary: #e0b0ff;
+    --ifm-color-primary-dark: #cf85ff;
+    --ifm-color-primary-darker: #c76fff;
+    --ifm-color-primary-darkest: #ad2fff;
+    --ifm-color-primary-light: #f1dbff;
+    --ifm-color-primary-lighter: #f9f1ff;
+    --ifm-color-primary-lightest: #ffffff;
+    --ifm-code-font-size: 95%;
 }
 
 .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+    background-color: rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 calc(-1 * var(--ifm-pre-padding));
+    padding: 0 var(--ifm-pre-padding);
 }
 
 html[data-theme="dark"] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Custom CSS */
 #my-image {
-  width: 50vw;
-  max-width: 200px;
-  border: 5px solid var(--ifm-color-primary);
+    width: 50vw;
+    max-width: 200px;
+    border: 5px solid var(--ifm-color-primary);
 }
 
 .admonition.admonition-info {
-  --ifm-color-primary: #c86fff1f;
-  background-color: var(--ifm-color-primary);
-  border-left-color: var(--ifm-color-primary-darkest);
+    --ifm-color-primary: #c86fff1f;
+    background-color: var(--ifm-color-primary);
+    border-left-color: var(--ifm-color-primary-darkest);
 }
 
 #resume-cta > h3 {
-  margin: 0;
+    margin: 0;
 }
 #resume-cta {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #c86fff1f;
-  border: none;
-  transition-duration: 0.5s;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #c86fff1f;
+    border: none;
+    transition-duration: 0.5s;
 }
 
 #resume-cta:hover {
-  background-color: var(--ifm-color-primary-dark);
-  color: rgba(0, 0, 0);
-  cursor: pointer;
+    background-color: var(--ifm-color-primary-dark);
+    color: rgba(0, 0, 0);
+    cursor: pointer;
 }
 
 #cv-cta > h3 {
-  margin: 0;
+    margin: 0;
 }
 #cv-cta {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #c86fff1f;
-  border: none;
-  transition-duration: 0.5s;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #c86fff1f;
+    border: none;
+    transition-duration: 0.5s;
 }
 
 #cv-cta:hover {
-  background-color: var(--ifm-color-primary-dark);
-  color: rgba(0, 0, 0);
-  cursor: pointer;
+    background-color: var(--ifm-color-primary-dark);
+    color: rgba(0, 0, 0);
+    cursor: pointer;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  #cv-cta {
-    margin-top: 10px;
-  }
+    #cv-cta {
+        margin-top: 10px;
+    }
 }
