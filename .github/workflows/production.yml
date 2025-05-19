@@ -164,7 +164,7 @@ jobs:
     deploy-ssh:
         name: Deploy to AWS Lightsail
         needs: test
-        if: needs.test.outputs.should_skip_cd == 'false' && github.event_name != 'pull_request'
+        if: needs.test.outputs.should_skip_cd == 'false' && github.actor == 'gitaalekhyapaul'
         environment: Production
         runs-on: ubuntu-latest
         # Cross-repository concurrency group to prevent multiple deployments to the same server
@@ -183,6 +183,9 @@ jobs:
                   username: ${{ secrets.AWS_USERNAME }}
                   key: ${{ secrets.AWS_PRIVATE_KEY }}
                   script: |
+                      echo $SHELL
+                      node -v
+                      which node
                       echo "Changing directory to /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }}"
                       cd /home/${{ secrets.AWS_USERNAME }}/${{ env.PROJECT_NAME }} || exit 1
                       echo "Pulling latest changes..."
