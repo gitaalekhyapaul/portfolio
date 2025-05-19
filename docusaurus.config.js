@@ -107,8 +107,8 @@ const config = {
                                 href: "https://www.linkedin.com/in/gitaalekhyapaul",
                             },
                             {
-                                label: "Twitter",
-                                href: "https://twitter.com/gitaalekhyapaul",
+                                label: "X (Formerly Twitter)",
+                                href: "https://x.com/gitaalekhyapaul",
                             },
                             {
                                 label: "Google Scholar",
